@@ -8,9 +8,6 @@ class App extends Component {
     return (
       <div className='App'>
         <Navbar />
-        <p className='App-intro'>
-          Hello in Quiz Learner! I'm App.js
-        </p>
         <Routes />
       </div>
     )
