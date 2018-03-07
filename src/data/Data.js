@@ -9,7 +9,13 @@ const getOptions = () => ({
   }
 })
 
-const handleJsonRespone = (res) => res.json()
+const handleJsonRespone = (res) => {
+  if (res) {
+    return res.json()
+  }
+
+  return res
+}
 
 const applyAuthorizationHeader = (options, authenticated) => {
   if (authenticated) {

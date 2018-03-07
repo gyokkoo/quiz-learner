@@ -10,13 +10,12 @@ class RegisterPage extends Component {
 
     this.state = {
       user: {
-        username: '',
-        password: '',
-        confirmPassword: '',
-        firstName: '',
-        lastName: '',
-        age: 0,
-        roles: []
+        username: 'TestUser',
+        password: '123456',
+        confirmPassword: '123456',
+        firstName: 'User',
+        lastName: 'Userov',
+        age: 12
       },
       error: ''
     }
@@ -46,18 +45,17 @@ class RegisterPage extends Component {
       return
     }
 
-    this.state.user.roles.push('User')
     userActions.register(this.state.user)
   }
 
   handleUserRegistration (data) {
-    window.alert('success!')
     console.log(data)
     if (!data.success) {
-      let firstError = FormHelpers.getFirstError(data)
-      this.setState({
-        error: firstError
-      })
+      console.log('ERROR!')
+     // let firstError = FormHelpers.getFirstError(data)
+      // this.setState({
+      //   error: firstError
+      // })
     } else {
      // toastr.success(data.message)
       this.props.history.push('/quiz-learner/users/login')

@@ -37,7 +37,7 @@ const RegisterForm = (props) => (
         name='age'
         type='number'
         placeholder='Age'
-        value={props.user.name}
+        value={props.user.age}
         onChange={props.onChange} />
       <button type='submit' className='btn btn-primary' onClick={props.onSave}>Submit</button>
     </fieldset>
