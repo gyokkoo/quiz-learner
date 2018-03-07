@@ -4,10 +4,13 @@ import userActions from '../actions/UserActions'
 
 class UserStore extends EventEmitter {
   register (user) {
+    console.log(user)
+    // TODO
     // Register user
   }
 
   login (user) {
+    // TODO
     // Login user
   }
 

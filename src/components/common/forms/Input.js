@@ -4,14 +4,17 @@ const Input = (props) => {
   let type = props.type || 'text'
 
   return (
-    <div>
-      <label htmlFor={props.name}>{props.placeholder} </label>
-      <input
-        type={type}
-        name={props.name}
-        placeholder={props.placeholder}
-        value={props.value}
-        onChange={props.onChange} />
+    <div className='form-group'>
+      <label htmlFor={props.name} className='col-sm-4 control-label'>{props.placeholder}</label>
+      <div className='col-sm-4'>
+        <input
+          type={type}
+          name={props.name}
+          placeholder={props.placeholder}
+          value={props.value}
+          onChange={props.onChange}
+          className='form-control' />
+      </div>
     </div>
   )
 }

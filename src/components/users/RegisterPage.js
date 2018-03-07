@@ -10,10 +10,13 @@ class RegisterPage extends Component {
 
     this.state = {
       user: {
-        email: '',
+        username: '',
         password: '',
         confirmPassword: '',
-        name: ''
+        firstName: '',
+        lastName: '',
+        age: 0,
+        roles: []
       },
       error: ''
     }
@@ -43,6 +46,7 @@ class RegisterPage extends Component {
       return
     }
 
+    this.state.user.roles.push('User')
     userActions.register(this.state.user)
   }
 
@@ -54,7 +58,7 @@ class RegisterPage extends Component {
       })
     } else {
      // toastr.success(data.message)
-      this.props.history.push('/pets-system-app/users/login')
+      this.props.history.push('/quiz-learner/users/login')
     }
   }
 
@@ -77,13 +81,14 @@ class RegisterPage extends Component {
 
   render () {
     return (
-      <div>
-        <h1>Register User</h1>
-        <RegisterForm
-          user={this.state.user}
-          error={this.state.error}
-          onChange={this.handleUserChange.bind(this)}
-          onSave={this.handleUserForm.bind(this)} />
+      <div className='container body-content span=8 offset=2'>
+        <div className='well well-lg'>
+          <RegisterForm
+            user={this.state.user}
+            error={this.state.error}
+            onChange={this.handleUserChange.bind(this)}
+            onSave={this.handleUserForm.bind(this)} />
+        </div>
       </div>
     )
   }
