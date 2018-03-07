@@ -51,6 +51,8 @@ class RegisterPage extends Component {
   }
 
   handleUserRegistration (data) {
+    window.alert('success!')
+    console.log(data)
     if (!data.success) {
       let firstError = FormHelpers.getFirstError(data)
       this.setState({

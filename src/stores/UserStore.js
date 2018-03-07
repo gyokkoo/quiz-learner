@@ -1,12 +1,11 @@
 import { EventEmitter } from 'events'
 import dispatcher from '../dispatcher'
 import userActions from '../actions/UserActions'
+import UserData from '../data/UserData'
 
 class UserStore extends EventEmitter {
   register (user) {
-    console.log(user)
-    // TODO
-    // Register user
+    UserData.register(user).then(data => this.emit(this.eventTypes.USER_REGISTERED, data))
   }
 
   login (user) {
