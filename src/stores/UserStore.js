@@ -5,12 +5,12 @@ import UserData from '../data/UserData'
 
 class UserStore extends EventEmitter {
   register (user) {
+    // works
     UserData.register(user).then(data => this.emit(this.eventTypes.USER_REGISTERED, data))
   }
 
   login (user) {
-    // TODO
-    // Login user
+    UserData.login(user).then(data => this.emit(this.eventTypes.USER_LOGGED_IN, data))
   }
 
   handleAction (action) {

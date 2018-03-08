@@ -12,7 +12,7 @@ class Navbar extends Component {
       <nav className='navbar navbar-default'>
         <div className='container-fluid'>
           <div className='navbar-header'>
-            <Link to='/quiz-learner/' className='navbar-brand'>Quiz Project</Link>
+            <Link to='/quiz-learner/' className='navbar-brand'>Quiz Leaner</Link>
           </div>
           {navbarLinks}
         </div>
