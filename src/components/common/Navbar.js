@@ -53,7 +53,7 @@ class Navbar extends Component {
         </div>
     } else {
       navbarLinks =
-        <ul className='nav navbar-nav center'>
+        <ul className='nav navbar-nav navbar-center'>
           <li><Link to='/quiz-learner/quiz/all'>All Quizzes</Link></li>
           <li><Link to='/quiz-learner/about'>About</Link></li>
           <li><Link to='/quiz-learner/users/register'>Register</Link></li>

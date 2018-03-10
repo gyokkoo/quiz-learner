@@ -48,9 +48,6 @@ class LoginPage extends Component {
         error: data.message
       })
     } else {
-      window.alert('Here')
-      console.log(data)
-      console.log(data.token)
       Auth.authenticateUser(data.token)
       Auth.saveUser(data.user)
       toastr.success(data.message)
