@@ -3,6 +3,7 @@ import FormHelpers from '../common/forms/FormHelpers'
 import RegisterForm from './RegisterForm'
 import userActions from '../../actions/UserActions'
 import userStore from '../../stores/UserStore'
+import toastr from 'toastr'
 
 class RegisterPage extends Component {
   constructor (props) {
@@ -51,13 +52,13 @@ class RegisterPage extends Component {
   handleUserRegistration (data) {
     console.log(data)
     if (!data.success) {
-      console.log('ERROR!')
-     // let firstError = FormHelpers.getFirstError(data)
-      // this.setState({
-      //   error: firstError
-      // })
+      console.log(data)
+      let firstError = data.message
+      this.setState({
+        error: firstError
+      })
     } else {
-     // toastr.success(data.message)
+      toastr.success(data.message)
       this.props.history.push('/quiz-learner/users/login')
     }
   }

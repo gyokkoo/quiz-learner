@@ -5,7 +5,7 @@ const LoginForm = (props) => (
   <form className='form-horizontal'>
     <fieldset>
       <legend>Login</legend>
-      <div>{props.error}</div>
+      <div className='text-danger'>{props.error}</div>
       <Input
         name='username'
         placeholder='Username'

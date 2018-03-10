@@ -4,6 +4,7 @@ import FormHelpers from '../common/forms/FormHelpers'
 import LoginForm from './LoginForm'
 import userActions from '../../actions/UserActions'
 import userStore from '../../stores/UserStore'
+import toastr from 'toastr'
 
 class LoginPage extends Component {
   constructor (props) {
@@ -11,7 +12,7 @@ class LoginPage extends Component {
     // Test purpose only
     this.state = {
       user: {
-        username: 'Test',
+        username: 'TestUser',
         password: '123456'
       },
       error: ''
@@ -47,9 +48,12 @@ class LoginPage extends Component {
         error: data.message
       })
     } else {
+      window.alert('Here')
+      console.log(data)
+      console.log(data.token)
       Auth.authenticateUser(data.token)
       Auth.saveUser(data.user)
-      // toastr.success(data.message)
+      toastr.success(data.message)
       this.props.history.push('/quiz-learner/')
     }
   }
