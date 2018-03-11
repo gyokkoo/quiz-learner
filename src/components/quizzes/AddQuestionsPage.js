@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-// import FormHelpers from '../common/forms/FormHelpers'
+import quizStore from '../../stores/QuizStore'
+import quizActions from '../../actions/QuizActions'
+// import toastr from 'toastr'
+
+// TODO : Refactor code below
 const Answers = ({ number, value, onClick }) => (
   <li onClick={onClick} className='list-group-item list-group-item-warning'>{value}</li>
 )
@@ -33,10 +37,17 @@ class AddQuestionsPage extends Component {
       question: '',
       questionNumber: 1,
       inputValue: '',
-      answers: ['Java', 'C#', 'C++'],
+      answers: [],
       correctAnswers: [],
       error: ''
     }
+
+    quizStore.on(quizStore.eventTypes.QUESTION_ADDED, this.handleQuestionCreation)
+  }
+
+  componentWillUnmount () {
+    quizStore.removeListener(
+      quizStore.eventTypes.QUESTION_ADDED, this.handleQuestionCreation)
   }
 
   handleQuestionChange (event) {
@@ -73,11 +84,24 @@ class AddQuestionsPage extends Component {
     this.setState({ correctAnswers })
   }
 
-  addQuestion (event) {
+  handleQuestionCreation (data) {
+    console.log(data)
+    // TODO: implement this!
+  }
+
+  handleQuestionAddition (event) {
     event.preventDefault()
-    console.log(this.state.quizId)
-    console.log(this.state.question)
-    // TODO: update the quiz in the server!
+
+    // TODO: validate!
+    let question = {
+      quizId: this.state.quizId,
+      questionName: this.state.question,
+      questionNumber: this.state.questionNumber,
+      answers: this.state.answers,
+      correctAnswers: this.state.correctAnswers
+    }
+    console.log(question)
+    quizActions.addQuestion(question)
   }
 
   render () {
@@ -110,7 +134,7 @@ class AddQuestionsPage extends Component {
                   className='btn btn-primary btn-md'
                   value='Submit Question with Answers'
                   type='submit'
-                  onClick={this.addQuestion.bind(this)} />
+                  onClick={this.handleQuestionAddition.bind(this)} />
               </div>
             </form>
           </div>
