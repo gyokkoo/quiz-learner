@@ -47,10 +47,9 @@ class CreateQuizPage extends Component {
   handleQuizCreation (data) {
     console.log(data)
     if (!data.success) {
-      // this.setState({
-      //   error: firstError
-      // })
-      // TODO
+      this.setState({
+        error: FormHelpers.getFirstError(data)
+      })
     } else {
       toastr.success(data.message)
       this.props.history.push(`/quiz-learner/quiz/details/${data.quiz._id}`)
@@ -61,6 +60,7 @@ class CreateQuizPage extends Component {
     return (
       <div>
         <div className='col-md-offset-4 col-md-3'>
+          <div>{this.state.error}</div>
           <form className='quiz-form'>
             <h2>Create Quiz</h2>
             <label>
