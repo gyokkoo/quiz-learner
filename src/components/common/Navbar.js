@@ -41,9 +41,9 @@ class Navbar extends Component {
         <div>
           <ul className='nav navbar-nav navbar-center'>
             <li><Link to='/quiz-learner/quiz/all'>All Quizzes</Link></li>
-            <li><Link to='/quiz-learner/quiz/add'>Add Quiz</Link></li>
-            <li><Link to='/quiz-learner/ranking'>Ranking</Link></li>
-            <li><Link to='/quiz-learner/report'>Report Problem</Link></li>
+            <li><Link to='/quiz-learner/quiz/create'>Create Quiz</Link></li>
+            {/* <li><Link to='/quiz-learner/ranking'>Ranking</Link></li> */}
+            {/* <li><Link to='/quiz-learner/report'>Report Problem</Link></li> */}
             <li><Link to='/quiz-learner/about'>About</Link></li>
           </ul>
           <ul className='nav navbar-nav navbar-right'>

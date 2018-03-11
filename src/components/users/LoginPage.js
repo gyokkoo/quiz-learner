@@ -43,6 +43,7 @@ class LoginPage extends Component {
   }
 
   handleUserLogin (data) {
+    console.log(data)
     if (!data.success) {
       this.setState({
         error: data.message

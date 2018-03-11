@@ -4,7 +4,7 @@ const quizActions = {
   types: {
     ADD_QUIZ: 'ADD_QUIZ'
   },
-  add (quiz) {
+  create (quiz) {
     dispatcher.dispatch({
       type: this.types.ADD_QUIZ,
       quiz
