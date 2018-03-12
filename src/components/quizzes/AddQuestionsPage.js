@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
-// import toastr from 'toastr'
+import FormHelpers from '../common/forms/FormHelpers'
+import toastr from 'toastr'
 
 // TODO : Refactor code below
 const Answers = ({ number, value, onClick }) => (
@@ -28,21 +29,28 @@ const ListCorrect = ({ items, onItemClick }) => (
   </ul>
 )
 
+const initialState = {
+  quizId: '',
+  question: '',
+  inputValue: '',
+  answers: [],
+  correctAnswers: [],
+  error: ''
+}
+
 class AddQuestionsPage extends Component {
   constructor (props) {
     super(props)
     let id = this.props.match.params.id
-    this.state = {
-      quizId: id,
-      question: '',
-      questionNumber: 1,
-      inputValue: '',
-      answers: [],
-      correctAnswers: [],
-      error: ''
-    }
+    initialState.quizId = id
 
+    this.state = initialState
+
+    this.handleQuestionCreation = this.handleQuestionCreation.bind(this)
     quizStore.on(quizStore.eventTypes.QUESTION_ADDED, this.handleQuestionCreation)
+  }
+
+  componentDidMount () {
   }
 
   componentWillUnmount () {
@@ -86,7 +94,15 @@ class AddQuestionsPage extends Component {
 
   handleQuestionCreation (data) {
     console.log(data)
-    // TODO: implement this!
+    if (!data.success) {
+      this.setState({
+        error: FormHelpers.getFirstError(data)
+      })
+    } else {
+      toastr.success(data.message)
+      initialState.questionNumber += 1
+      this.setState(initialState)
+    }
   }
 
   handleQuestionAddition (event) {
@@ -100,8 +116,13 @@ class AddQuestionsPage extends Component {
       answers: this.state.answers,
       correctAnswers: this.state.correctAnswers
     }
-    console.log(question)
     quizActions.addQuestion(question)
+  }
+
+  handleQuizFinish (event) {
+    event.preventDefault()
+    toastr.success('You finished the quiz creation!')
+    this.props.history.push(`/quiz-learner/quiz/all`)
   }
 
   render () {
@@ -125,7 +146,7 @@ class AddQuestionsPage extends Component {
                 <List items={this.state.answers} onItemClick={this.handleItemClick.bind(this)} />
               </div>
               <div>
-                Correct Answers:
+                Correct Answers (Click on the answer to select):
                 <ListCorrect items={this.state.correctAnswers} onItemClick={this.handleCorrectAnswerClick.bind(this)} />
               </div>
               <hr />
@@ -136,6 +157,14 @@ class AddQuestionsPage extends Component {
                   type='submit'
                   onClick={this.handleQuestionAddition.bind(this)} />
               </div>
+              <hr />
+              <span className='group-btn'>
+                <input
+                  className='btn btn-danger btn-md'
+                  value='Finish Quiz!'
+                  type='submit'
+                  onClick={this.handleQuizFinish.bind(this)} />
+              </span>
             </form>
           </div>
         </div>

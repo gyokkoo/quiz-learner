@@ -11,6 +11,7 @@ class QuizStore extends EventEmitter {
   }
 
   addQuestion (question) {
+    console.log(question)
     QuizData.addQuestion(question).then(data => this.emit(this.eventTypes.QUESTION_ADDED, data))
   }
 
