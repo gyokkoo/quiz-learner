@@ -14,6 +14,10 @@ class QuizData {
   static getAllQuizzes () {
     return Data.get(`${baseUrl}/getAllQuizzes`, true)
   }
+
+  static getQuestions (id) {
+    return Data.get(`${baseUrl}/getQuestions/${id}`, true)
+  }
 }
 
 export default QuizData
