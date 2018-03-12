@@ -9,11 +9,11 @@ import toastr from 'toastr'
 class LoginPage extends Component {
   constructor (props) {
     super(props)
-    // Test purpose only
+
     this.state = {
       user: {
-        username: 'TestUser',
-        password: '123456'
+        username: '',
+        password: ''
       },
       error: ''
     }
@@ -37,7 +37,7 @@ class LoginPage extends Component {
   handleUserForm (event) {
     event.preventDefault()
 
-    // Validate form
+    // TODO: Validate form
 
     userActions.login(this.state.user)
   }

@@ -11,12 +11,12 @@ class RegisterPage extends Component {
 
     this.state = {
       user: {
-        username: 'TestUser',
-        password: '123456',
-        confirmPassword: '123456',
-        firstName: 'User',
-        lastName: 'Userov',
-        age: 12
+        username: '',
+        password: '',
+        confirmPassword: '',
+        firstName: '',
+        lastName: '',
+        age: 0
       },
       error: ''
     }
@@ -50,9 +50,9 @@ class RegisterPage extends Component {
   }
 
   handleUserRegistration (data) {
-    console.log(data)
+    // console.log(data)
     if (!data.success) {
-      console.log(data)
+      // console.log(data)
       let firstError = data.message
       this.setState({
         error: firstError

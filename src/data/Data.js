@@ -1,6 +1,7 @@
 import Auth from '../components/users/Auth'
 
-const baseUrl = 'http://localhost:8080/'
+// const baseUrl = 'http://localhost:8080/'
+const baseUrl = 'https://quiz-learner-server.herokuapp.com/'
 const getOptions = () => ({
   mode: 'cors',
   headers: {
