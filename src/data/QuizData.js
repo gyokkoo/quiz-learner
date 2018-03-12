@@ -10,6 +10,10 @@ class QuizData {
   static addQuestion (question) {
     return Data.post(`${baseUrl}/addQuestion`, question, true)
   }
+
+  static getAllQuizzes () {
+    return Data.get(`${baseUrl}/getAllQuizzes`, true)
+  }
 }
 
 export default QuizData

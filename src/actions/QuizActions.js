@@ -16,6 +16,11 @@ const quizActions = {
       type: this.types.ADD_QUESTION,
       question
     })
+  },
+  getAllQuizzes () {
+    dispatcher.dispatch({
+      type: this.types.GET_ALL_QUIZZES
+    })
   }
 }
 

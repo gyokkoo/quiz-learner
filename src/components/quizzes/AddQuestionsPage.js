@@ -35,6 +35,7 @@ const initialState = {
   inputValue: '',
   answers: [],
   correctAnswers: [],
+  questionNumber: 1,
   error: ''
 }
 
@@ -135,7 +136,7 @@ class AddQuestionsPage extends Component {
               <label>
                 <input
                   className='form-control input-sm chat-input'
-                  type='text' name='question' size='50' required
+                  type='text' value={this.state.question} name='question' size='50' required
                   onChange={this.handleQuestionChange.bind(this)} />
               </label>
               <br />
