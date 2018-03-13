@@ -1,6 +1,6 @@
 {
   "name": "quiz-learner-app",
-  "homepage": "https://nezhdetov.github.io/quiz-learner/",
+  "homepage": "http://nezhdetov.github.io/quiz-learner-app/",
   "version": "0.3.5",
   "private": true,
   "dependencies": {
@@ -15,7 +15,7 @@
     "gh-pages": "^1.1.0"
   },
   "scripts": {
-    "predeploy": "yarn run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
