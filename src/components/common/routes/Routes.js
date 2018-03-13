@@ -5,6 +5,7 @@ import HomePage from '../../HomePage'
 import RegisterPage from '../../users/RegisterPage'
 import LoginPage from '../../users/LoginPage'
 import LogoutPage from '../../users/LogoutPage'
+import UserProfilePage from '../../users/UserProfilePage'
 import AboutPage from '../../AboutPage'
 import AllQuizzesPage from '../../quizzes/AllQuizzesPage'
 import CreateQuizPage from '../../quizzes/CreateQuizPage'
@@ -23,6 +24,7 @@ const Routes = () => (
     <PrivateRoute path='/quiz-learner/quiz/details/:id' component={AddQuestionsPage} />
     <PrivateRoute path='/quiz-learner/details/solve/:id' component={SolveQuizPage} />
     <PrivateRoute path='/quiz-learner/users/logout' component={LogoutPage} />
+    <PrivateRoute path='/quiz-learner/me' component={UserProfilePage} />
   </Switch>
 )
 
