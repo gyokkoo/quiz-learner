@@ -4,7 +4,8 @@ const quizActions = {
   types: {
     ADD_QUIZ: 'ADD_QUIZ',
     ADD_QUESTION: 'ADD_QUESTION',
-    GET_QUESTIONS: 'GET_QUESTIONS',
+    GET_ALL_QUIZZES: 'GET_ALL_QUIZZES',
+    GET_ALL_QUESTIONS: 'GET_ALL_QUESTIONS',
     GET_QUIZ_BY_ID: 'GET_QUIZ_BY_ID'
   },
   create (quiz) {
@@ -26,7 +27,7 @@ const quizActions = {
   },
   getAllQuestions (quizId) {
     dispatcher.dispatch({
-      type: this.types.GET_QUESTIONS,
+      type: this.types.GET_ALL_QUESTIONS,
       quizId
     })
   },
