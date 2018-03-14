@@ -15,8 +15,12 @@ class QuizData {
     return Data.get(`${baseUrl}/getAllQuizzes`, true)
   }
 
-  static getQuestions (id) {
+  static getAllQuestions (id) {
     return Data.get(`${baseUrl}/getQuestions/${id}`, true)
+  }
+
+  static getQuizById (id) {
+    return Data.get(`${baseUrl}/getQuizById/${id}`, true)
   }
 }
 

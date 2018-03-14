@@ -14,33 +14,30 @@ class QuizDetailsPage extends Component {
       }
     }
 
-    this.handleQuestionsFetching = this.handleQuestionsFetching.bind(this)
-    quizStore.on(quizStore.eventTypes.QUESTIONS_FETCHED, this.handleQuestionsFetching)
+    this.handleQuizFetching = this.handleQuizFetching.bind(this)
+    quizStore.on(quizStore.eventTypes.QUIZ_FETCHED, this.handleQuizFetching)
   }
 
   componentDidMount () {
-    quizActions.getQuestions(this.state.id)
+    quizActions.getQuizById(this.state.id)
   }
 
   componentWillUnmount () {
     quizStore.removeListener(
-      quizStore.eventTypes.QUESTIONS_FETCHED, this.handleQuestionsFetching)
+      quizStore.eventTypes.QUIZ_FETCHED, this.handleQuizFetching)
   }
 
-  handleQuestionsFetching (data) {
+  handleQuizFetching (data) {
     console.log(data)
     // TODO: Validate!
 
     this.setState({
-      questions: data.questions
+      quiz: data.quiz
     })
-    toastr.success('Question loaded!')
+    toastr.success('Quiz loaded!')
   }
 
   render () {
-    if (this.state.questions.length > 0) {
-      console.log(this.state.questions)
-    }
     return (
       <div>
         <h4>Quiz details:</h4>

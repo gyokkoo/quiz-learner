@@ -28,7 +28,7 @@ class SolveQuizPage extends Component {
   }
 
   componentDidMount () {
-    quizActions.getQuestions(this.state.id)
+    quizActions.getAllQuestions(this.state.id)
   }
 
   componentWillUnmount () {
