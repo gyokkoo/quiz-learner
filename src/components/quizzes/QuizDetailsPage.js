@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
 // import FormHelpers from '../common/forms/FormHelpers'
+import { Link } from 'react-router-dom'
 import toastr from 'toastr'
 
 class QuizDetailsPage extends Component {
@@ -10,8 +11,13 @@ class QuizDetailsPage extends Component {
     let quizId = this.props.match.params.id
     this.state = {
       id: quizId,
+      creator: '',
       quiz: {
-      }
+        name: '',
+        description: '',
+        questions: []
+      },
+      loading: true
     }
 
     this.handleQuizFetching = this.handleQuizFetching.bind(this)
@@ -29,18 +35,49 @@ class QuizDetailsPage extends Component {
 
   handleQuizFetching (data) {
     console.log(data)
-    // TODO: Validate!
+
+    // TODO: Validate the input data!
 
     this.setState({
+      loading: false,
+      creator: data.creator,
       quiz: data.quiz
     })
     toastr.success('Quiz loaded!')
   }
 
   render () {
+    const { creator, quiz } = this.state
+    if (this.state.loading) {
+      return null
+    } else {
+      console.log(this.state)
+    }
+    let questionsCount = quiz.questions.length
     return (
-      <div>
-        <h4>Quiz details:</h4>
+      <div className='well container'>
+        <div className='row'>
+          <div className='text-center'>
+            <h2>{quiz.name}</h2>
+            <p>{quiz.description}</p>
+            <div>
+              Questions Count: {questionsCount}
+            </div>
+            <div>
+              Added by user: <em>{creator}</em>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div className='group-btn'>
+          <Link to={`/quiz-learner/quiz/details/solve/${this.state.id}`}>
+            <input type='button' className='btn btn-primary btn-md' value='Start quiz!' />
+          </Link>
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <Link to='/quiz-learner/quiz/all'>
+            <input type='button' className='btn btn-warning btn-md' value='All Quizzes!' />
+          </Link>
+        </div>
       </div>
     )
   }
