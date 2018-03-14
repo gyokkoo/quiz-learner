@@ -52,7 +52,7 @@ class CreateQuizPage extends Component {
       })
     } else {
       toastr.success(data.message)
-      this.props.history.push(`/quiz-learner/quiz/details/${data.quiz._id}`)
+      this.props.history.push(`/quiz-learner/quiz/add/${data.quiz._id}`)
     }
   }
 
