@@ -49,9 +49,49 @@ class SolveQuizPage extends Component {
     console.log(this.state)
   }
 
+  handlePreviousClicked (e) {
+    const currentQuestion = this.state.questionIndex
+    this.setState({
+      questionIndex: currentQuestion - 1
+    })
+  }
+
+  handleNextClicked (e) {
+    const currentQuestion = this.state.questionIndex
+    this.setState({
+      questionIndex: currentQuestion + 1
+    })
+  }
+
+  handleFinishClicked (e) {
+    window.alert('finished!')
+  }
+
   render () {
     const { questions, questionIndex } = this.state
 
+    if (questions[questionIndex] === undefined) {
+      return <div>No questions to show</div>
+    }
+
+    let buttons = ''
+    if (questionIndex === 0) {
+      buttons =
+        <input type='button' className='btn btn-primary btn-md'
+          onClick={this.handleNextClicked.bind(this)} value='Next question' />
+    } else if (questionIndex === questions.length - 1) {
+      buttons =
+        <input type='button' className='btn btn-primary btn-md'
+          onClick={this.handlePreviousClicked.bind(this)} value='Previous question' />
+    } else {
+      buttons =
+        <div>
+          <input type='button' className='btn btn-primary btn-md'
+            onClick={this.handlePreviousClicked.bind(this)} value='Previous question' />
+          <input type='button' className='btn btn-primary btn-md'
+            onClick={this.handleNextClicked.bind(this)} value='Next question' />
+        </div>
+    }
     return (
       <div>
         <div>
@@ -59,10 +99,12 @@ class SolveQuizPage extends Component {
             question={questions[questionIndex].question}
             answers={questions[questionIndex].answers}
             correctAnswers={questions[questionIndex].correctAnswers} />
-          <input type='button' className='btn btn-primary btn-md' value='Previous question' />
-          <input type='button' className='btn btn-primary btn-md' value='Next question' />
+          <div>
+            {buttons}
+          </div>
           <br />
-          <input type='button' className='btn btn-success btn-md' value='Finish' />
+          <input type='button' className='btn btn-success btn-md'
+            onClick={this.handleFinishClicked.bind(this)} value='Finish' />
         </div>
       </div>
     )
