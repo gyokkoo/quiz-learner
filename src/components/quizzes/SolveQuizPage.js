@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
 import Question from './common/Question'
-// import FormHelpers from '../common/forms/FormHelpers'
 import toastr from 'toastr'
+import Auth from '../users/Auth'
 import quizCache from '../../data/helpers/QuizCache'
 
 const initialState = {
@@ -69,12 +69,29 @@ class SolveQuizPage extends Component {
     let index = this.state.questionIndex
     let filteredAnswers = selectedAnswers
       .filter(answer => this.state.questions[index].answers.indexOf(answer) !== -1)
-    quizCache.addAnswers(this.state.questions[index]._id, filteredAnswers)
+    quizCache.addAnswers(this.state.questions[index]._id, filteredAnswers, index)
   }
 
   handleFinishClicked (e) {
-    console.log(quizCache.getAnswers())
+    let allAnswers = quizCache.getAnswers()
     quizCache.clear()
+
+    let questionIds = []
+    let userAnswers = []
+    for (let i in allAnswers) {
+      let currentJson = JSON.parse(allAnswers[i])
+      questionIds.push(currentJson.id)
+      userAnswers.push(currentJson.answers)
+    }
+    let solvedQuizData = {
+      quizId: this.state.id,
+      userId: Auth.getUser().id,
+      questions: questionIds,
+      answers: userAnswers
+    }
+
+    console.log(solvedQuizData)
+    quizActions.addSolvedQuiz(solvedQuizData)
   }
 
   render () {

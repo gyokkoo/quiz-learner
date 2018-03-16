@@ -1,6 +1,9 @@
 class QuizCache {
-  static addAnswers (id, answers) {
-    window.sessionStorage.setItem(id, JSON.stringify(answers))
+  static addAnswers (id, answers, number) {
+    const obj = {}
+    obj.id = id
+    obj.answers = answers
+    window.sessionStorage.setItem(number, JSON.stringify(obj))
   }
 
   static getAnswers () {

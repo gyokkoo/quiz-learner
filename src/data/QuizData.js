@@ -12,15 +12,19 @@ class QuizData {
   }
 
   static getAllQuizzes () {
-    return Data.get(`${baseUrl}/getAllQuizzes`, true)
+    return Data.get(`${baseUrl}/getAllQuizzes`)
   }
 
   static getAllQuestions (id) {
-    return Data.get(`${baseUrl}/getQuestions/${id}`, true)
+    return Data.get(`${baseUrl}/getQuestions/${id}`)
   }
 
   static getQuizById (id) {
-    return Data.get(`${baseUrl}/getQuizById/${id}`, true)
+    return Data.get(`${baseUrl}/getQuizById/${id}`)
+  }
+
+  static addSolvedQuiz (solvedQuiz) {
+    return Data.post(`${baseUrl}/addSolvedQuiz`, solvedQuiz, true)
   }
 }
 
