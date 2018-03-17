@@ -90,8 +90,9 @@ class SolveQuizPage extends Component {
       answers: userAnswers
     }
 
-    console.log(solvedQuizData)
     quizActions.addSolvedQuiz(solvedQuizData)
+    toastr.success('Quiz Finished!')
+    this.props.history.push(`/quiz-learner/quiz/result/solved/undefined`)
   }
 
   render () {
@@ -121,7 +122,7 @@ class SolveQuizPage extends Component {
     }
     return (
       <div>
-        <div>
+        <div className='container'>
           <Question
             question={questions[questionIndex].question}
             answers={questions[questionIndex].answers}
