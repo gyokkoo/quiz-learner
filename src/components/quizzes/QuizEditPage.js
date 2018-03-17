@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
 // import Auth from '../users/Auth'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import toastr from 'toastr'
+import Question from './Question'
 
 class QuizEditPage extends Component {
   constructor (props) {
@@ -14,8 +15,7 @@ class QuizEditPage extends Component {
       creator: '',
       quiz: {
         name: '',
-        description: '',
-        questions: []
+        description: ''
       },
       questions: [{
         question: '',
@@ -52,14 +52,27 @@ class QuizEditPage extends Component {
   }
 
   render () {
-    // const { creator, quiz } = this.state
     if (this.state.loading) {
-      return null
+      return <div>Loading ...</div>
     }
-
+    let result = this.state.questions.map((question, index) => (
+      <div key={index}>
+        <Question
+          question={question.question}
+          answers={question.answers}
+          correct={question.correctAnswers}
+          allowClicking={false} />
+        <Link to={`/quiz-learner/question/edit/${question._id}`}>
+          <input type='button' className='btn btn-info btn-md' value='Edit question!' />
+        </Link>
+        <hr />
+      </div>
+    ))
     console.log(this.state)
     return (
-      <div>Hello from edit Page!</div>
+      <div className='container'>
+        {result}
+      </div>
     )
   }
 }

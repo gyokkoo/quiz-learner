@@ -26,8 +26,12 @@ class Question extends Component {
     }
   }
 
+  ignore () {
+    // ignored
+  }
+
   render () {
-    const {question, answers} = this.props
+    const {question, answers, allowClicking} = this.props
 
     return (
       <div>
@@ -35,7 +39,7 @@ class Question extends Component {
         <ListAnswers
           answers={answers}
           selected={this.state.selectedAnswers}
-          onClicked={this.handleAnswerClicked.bind(this)} />
+          onClicked={allowClicking ? this.handleAnswerClicked.bind(this) : this.ignore()} />
       </div>
     )
   }

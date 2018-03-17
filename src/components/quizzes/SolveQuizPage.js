@@ -127,7 +127,8 @@ class SolveQuizPage extends Component {
             question={questions[questionIndex].question}
             answers={questions[questionIndex].answers}
             correctAnswers={questions[questionIndex].correctAnswers}
-            addAnswers={this.addSelectedAnswers.bind(this)} />
+            addAnswers={this.addSelectedAnswers.bind(this)}
+            allowClicking='true' />
           <div>
             {buttons}
           </div>
