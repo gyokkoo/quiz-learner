@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import quizStore from '../../stores/QuizStore'
+import { Link } from 'react-router-dom'
 import toastr from 'toastr'
 
 class QuizResultsPage extends Component {
@@ -18,9 +19,10 @@ class QuizResultsPage extends Component {
       scoreResult: {
         correctCount: 0,
         score: 0,
-        wrongCount: 0,
-        wrongIds: []
+        wrongAnswers: {},
+        correctAnswers: {}
       },
+      show: false,
       loading: true,
       error: ''
     }
@@ -51,16 +53,41 @@ class QuizResultsPage extends Component {
     }
   }
 
+  showWrongAnswers () {
+    window.alert('im clicked')
+    this.setState({
+      show: true
+    })
+  }
+
   render () {
     const { quiz, scoreResult } = this.state
     if (this.state.loading) {
       return null
     }
 
+    let wrongAnswers = ''
+    if (this.state.show) {
+      if (scoreResult.wrongAnswers.length > 0) {
+        wrongAnswers = scoreResult.wrongAnswers.map((answer, index) => (
+          <div key={index}>
+            <h4 className='text-danger'>{answer.question}</h4>
+            <div>Your answer : </div>
+            <span>{answer.answer}</span>
+            <div>Correct answer : </div>
+            <span>{answer.correctAnswer}</span>
+          </div>
+        ))
+      } else {
+        wrongAnswers = <div>No wrong answers! </div>
+      }
+    }
+
     return (
       <div className='well container'>
         <div className='row'>
           <div className='text-center'>
+            <h4>Congratulations! You completed the quiz!</h4>
             <div>
               Questions Count: {quiz.questions.length}
             </div>
@@ -76,15 +103,15 @@ class QuizResultsPage extends Component {
           </div>
         </div>
         <hr />
-        {/* <div className='group-btn'>
-          <Link to={`/quiz-learner/quiz/details/solve/${this.state.id}`}>
-            <input type='button' className='btn btn-primary btn-md' value='Start quiz!' />
-          </Link>
+        <div className='group-btn'>
+          <input type='button' onClick={this.showWrongAnswers.bind(this)} className='btn btn-primary btn-md' value='Check your wrongs answers!' />
           <span>&nbsp;&nbsp;&nbsp;</span>
           <Link to='/quiz-learner/quiz/all'>
-            <input type='button' className='btn btn-warning btn-md' value='All Quizzes!' />
+            <input type='button' className='btn btn-warning btn-md' value='Practice more!' />
           </Link>
-        </div> */}
+        </div>
+        <hr />
+        <div>{wrongAnswers}</div>
       </div>
     )
   }
