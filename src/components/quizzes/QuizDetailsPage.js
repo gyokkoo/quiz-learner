@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
-// import FormHelpers from '../common/forms/FormHelpers'
+import Auth from '../users/Auth'
 import { Link } from 'react-router-dom'
 import toastr from 'toastr'
 
@@ -53,6 +53,16 @@ class QuizDetailsPage extends Component {
     } else {
       console.log(this.state)
     }
+
+    let editButton = ''
+    console.log()
+    if (this.state.creator === Auth.getUser().name) {
+      editButton =
+        <Link to={`/quiz-learner/quiz/edit/${this.state.id}`}>
+          <input type='button' className='btn btn-danger btn-md' value='Edit quiz!' />
+        </Link>
+    }
+
     let questionsCount = quiz.questions.length
     return (
       <div className='well container'>
@@ -64,7 +74,7 @@ class QuizDetailsPage extends Component {
               Questions Count: {questionsCount}
             </div>
             <div>
-              Added by user: <em>{creator}</em>
+              Added by: <em>{creator}</em>
             </div>
           </div>
         </div>
@@ -77,6 +87,8 @@ class QuizDetailsPage extends Component {
           <Link to='/quiz-learner/quiz/all'>
             <input type='button' className='btn btn-warning btn-md' value='All Quizzes!' />
           </Link>
+          <hr />
+          {editButton}
         </div>
       </div>
     )

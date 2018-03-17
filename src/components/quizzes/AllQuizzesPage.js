@@ -46,7 +46,7 @@ class AllQuizzesPage extends Component {
       <tr key={quiz._id}>
         <td>{quiz.name}</td>
         <td>{quiz.description ? quiz.description : 'No description' }</td>
-        <td><Link to={`/quiz-learner/quiz/details/${quiz._id}`}>Practice</Link></td>
+        <td><Link to={`/quiz-learner/quiz/details/${quiz._id}`}>Details</Link></td>
       </tr>
     )
 
