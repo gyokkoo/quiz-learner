@@ -10,7 +10,8 @@ class AllQuizzesPage extends Component {
     super(props)
 
     this.state = {
-      quizzes: []
+      quizzes: [],
+      loaded: false
     }
 
     this.handleQuizzesFetching = this.handleQuizzesFetching.bind(this)
@@ -30,12 +31,17 @@ class AllQuizzesPage extends Component {
 
     // TODO: Validate!
     this.setState({
-      quizzes: data.quizzes
+      quizzes: data.quizzes,
+      loaded: true
     })
     toastr.success('Quizzes loaded!')
   }
 
   render () {
+    if (!this.state.loaded) {
+      return <div>Loading ...</div>
+    }
+
     let quizRows = this.state.quizzes.map(quiz =>
       <tr key={quiz._id}>
         <td>{quiz.name}</td>

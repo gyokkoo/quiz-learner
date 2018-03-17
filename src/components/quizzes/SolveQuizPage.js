@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
-import Question from './common/Question'
+import Question from './Question'
 import toastr from 'toastr'
 import Auth from '../users/Auth'
 import quizCache from '../../data/helpers/QuizCache'

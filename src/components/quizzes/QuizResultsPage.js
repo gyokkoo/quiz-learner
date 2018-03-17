@@ -22,8 +22,9 @@ class QuizResultsPage extends Component {
         wrongAnswers: {},
         correctAnswers: {}
       },
-      show: false,
       loading: true,
+      showCorrect: false,
+      showWrong: false,
       error: ''
     }
 
@@ -54,9 +55,13 @@ class QuizResultsPage extends Component {
   }
 
   showWrongAnswers () {
-    window.alert('im clicked')
     this.setState({
-      show: true
+      showWrong: true
+    })
+  }
+  showCorrectAnswers () {
+    this.setState({
+      showCorrect: true
     })
   }
 
@@ -67,19 +72,34 @@ class QuizResultsPage extends Component {
     }
 
     let wrongAnswers = ''
-    if (this.state.show) {
+    if (this.state.showWrong) {
       if (scoreResult.wrongAnswers.length > 0) {
         wrongAnswers = scoreResult.wrongAnswers.map((answer, index) => (
           <div key={index}>
             <h4 className='text-danger'>{answer.question}</h4>
             <div>Your answer : </div>
             <span>{answer.answer}</span>
-            <div>Correct answer : </div>
+            <div className='text-info'>Correct answer : </div>
             <span>{answer.correctAnswer}</span>
           </div>
         ))
       } else {
         wrongAnswers = <div>No wrong answers! </div>
+      }
+    }
+
+    let correctAnswers = ''
+    if (this.state.showCorrect) {
+      if (scoreResult.correctAnswers.length > 0) {
+        correctAnswers = scoreResult.correctAnswers.map((answer, index) => (
+          <div key={index}>
+            <h4 className='text-info'>{answer.question}</h4>
+            <div>Your answer : </div>
+            <span className='text-success'>{answer.answer}</span>
+          </div>
+        ))
+      } else {
+        correctAnswers = <div>No correct answers! </div>
       }
     }
 
@@ -104,14 +124,16 @@ class QuizResultsPage extends Component {
         </div>
         <hr />
         <div className='group-btn'>
-          <input type='button' onClick={this.showWrongAnswers.bind(this)} className='btn btn-primary btn-md' value='Check your wrongs answers!' />
+          <input type='button' onClick={this.showWrongAnswers.bind(this)} className='btn btn-primary btn-md' value='See your wrongs answers!' />
           <span>&nbsp;&nbsp;&nbsp;</span>
-          <Link to='/quiz-learner/quiz/all'>
-            <input type='button' className='btn btn-warning btn-md' value='Practice more!' />
-          </Link>
+          <input type='button' onClick={this.showCorrectAnswers.bind(this)} className='btn btn-primary btn-md' value='See your correct answers!' />
         </div>
         <hr />
         <div>{wrongAnswers}</div>
+        <div>{correctAnswers}</div>
+        <Link to='/quiz-learner/quiz/all'>
+          <input type='button' className='btn btn-warning btn-md' value='Practice more!' />
+        </Link>
       </div>
     )
   }
