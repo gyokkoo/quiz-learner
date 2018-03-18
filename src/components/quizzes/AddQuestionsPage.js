@@ -134,9 +134,9 @@ class AddQuestionsPage extends Component {
             <form className='question-form'>
               <h2>Question {this.state.questionNumber}:</h2>
               <label>
-                <input
+                <textarea
                   className='form-control input-sm chat-input'
-                  type='text' value={this.state.question} name='question' size='50' required
+                  type='textarea' rows='10' cols='50' value={this.state.question} name='question' required
                   onChange={this.handleQuestionChange.bind(this)} />
               </label>
               <br />
