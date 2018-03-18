@@ -40,6 +40,12 @@ class QuizStore extends EventEmitter {
       .then(data => this.emit(this.eventTypes.QUIZ_FETCHED, data))
   }
 
+  getQuestionById (id) {
+    QuizData
+      .getQuestionById(id)
+      .then(data => this.emit(this.eventTypes.QUESTION_FETCHED, data))
+  }
+
   handleAction (action) {
     switch (action.type) {
       case quizActions.types.ADD_QUIZ: {
@@ -66,6 +72,10 @@ class QuizStore extends EventEmitter {
         this.addSolvedQuiz(action.solvedQuiz)
         break
       }
+      case quizActions.types.GET_QUESTION_BY_ID: {
+        this.getQuestionById(action.id)
+        break
+      }
       default:
         break
     }
@@ -80,7 +90,8 @@ quizStore.eventTypes = {
   QUIZZES_FETCHED: 'quizzes_fetched',
   QUIZ_FETCHED: 'quiz_fetched',
   QUESTIONS_FETCHED: 'questions_fetched',
-  SOLVED_QUIZ_ADDED: 'solved_quiz_added'
+  SOLVED_QUIZ_ADDED: 'solved_quiz_added',
+  QUESTION_FETCHED: 'question_fetched'
 }
 
 dispatcher.register(quizStore.handleAction.bind(quizStore))

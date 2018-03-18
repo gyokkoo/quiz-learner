@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
 // import Auth from '../users/Auth'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import toastr from 'toastr'
 import Question from './Question'
 
@@ -13,31 +13,27 @@ class QuizEditPage extends Component {
     this.state = {
       id: quizId,
       creator: '',
-      quiz: {
-        name: '',
-        description: ''
-      },
-      questions: [{
+      question: {
         question: '',
         answers: [],
         correctAnswers: []
-      }],
+      },
       loading: true
     }
 
-    this.handleQuizFetching = this.handleQuizFetching.bind(this)
-    quizStore.on(quizStore.eventTypes.QUIZ_FETCHED, this.handleQuizFetching)
+    this.handleQuestionFetching = this.handleQuestionFetching.bind(this)
+    quizStore.on(quizStore.eventTypes.QUIZ_FETCHED, this.handleQuestionFetching)
   }
 
   componentDidMount () {
-    quizActions.getQuizById(this.state.id)
+    quizActions.getQuestionById(this.state.id)
   }
 
   componentWillUnmount () {
-    quizStore.removeListener(quizStore.eventTypes.QUIZ_FETCHED, this.handleQuizFetching)
+    quizStore.removeListener(quizStore.eventTypes.QUESTION_FETCHED, this.handleQuestionFetching)
   }
 
-  handleQuizFetching (data) {
+  handleQuestionFetching (data) {
     console.log(data)
 
     // TODO: Validate the input data!
@@ -45,34 +41,30 @@ class QuizEditPage extends Component {
     this.setState({
       loading: false,
       creator: data.creator,
-      quiz: data.quiz,
       questions: data.allQuestions
     })
-    toastr.success('Quiz loaded!')
+    toastr.success('Question loaded!')
+  }
+
+  handleSaveClicked () {
+    window.alert('save question!')
   }
 
   render () {
-    // const { creator, questions } = this.state
+    const { question } = this.state
     if (this.state.loading) {
       return <div>Loading</div>
     }
-    let result = this.state.questions.map((question, index) => (
-      <div key={index}>
+    console.log(this.state)
+    return (
+      <div className='container'>
         <Question
           question={question.question}
           answers={question.answers}
           correct={question.correctAnswers}
           allowClicking={false} />
-        <Link to={`/quiz-learner/question/edit/${question._id}`}>
-          <input type='button' className='btn btn-info btn-md' value='Edit question!' />
-        </Link>
-        <hr />
-      </div>
-    ))
-    console.log(this.state)
-    return (
-      <div className='container'>
-        {result}
+        <input type='button' className='btn btn-primary btn-md'
+          onClick={this.handleSaveClicked.bind(this)} value='Save Changes' />
       </div>
     )
   }

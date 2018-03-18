@@ -26,6 +26,10 @@ class QuizData {
   static addSolvedQuiz (solvedQuiz) {
     return Data.post(`${baseUrl}/addSolvedQuiz`, solvedQuiz, true)
   }
+
+  static getQuestionById (id) {
+    return Data.get(`${baseUrl}/getQuestionById/${id}`)
+  }
 }
 
 export default QuizData
