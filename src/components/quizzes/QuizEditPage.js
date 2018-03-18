@@ -52,7 +52,6 @@ class QuizEditPage extends Component {
   }
 
   render () {
-    // const { creator, questions } = this.state
     if (this.state.loading) {
       return <div>Loading</div>
     }

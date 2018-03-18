@@ -26,8 +26,12 @@ class QuestionEditPage extends Component {
 
     this.handleQuestionFetching = this.handleQuestionFetching.bind(this)
     quizStore.on(quizStore.eventTypes.QUESTION_FETCHED, this.handleQuestionFetching)
+
     this.handleQuestionEdited = this.handleQuestionEdited.bind(this)
     quizStore.on(quizStore.eventTypes.QUESTION_EDITED, this.handleQuestionEdited)
+
+    this.handleQuestionDeleted = this.handleQuestionDeleted.bind(this)
+    quizStore.on(quizStore.eventTypes.QUESTION_DELETED, this.handleQuestionDeleted)
   }
 
   componentDidMount () {
@@ -37,6 +41,7 @@ class QuestionEditPage extends Component {
   componentWillUnmount () {
     quizStore.removeListener(quizStore.eventTypes.QUESTION_FETCHED, this.handleQuestionFetching)
     quizStore.removeListener(quizStore.eventTypes.QUESTION_EDITED, this.handleQuestionEdited)
+    quizStore.removeListener(quizStore.eventTypes.QUESTION_DELETED, this.handleQuestionDeleted)
   }
 
   handleUserChange (event) {
@@ -68,8 +73,25 @@ class QuestionEditPage extends Component {
   }
 
   handleQuestionEdited (data) {
-    console.log('0_0')
-    console.log(data)
+    if (!data.success) {
+      this.setState({
+        error: data.message
+      })
+    } else {
+      toastr.success(data.message)
+      this.props.push(`/quiz-learner/quiz/edit/${this.state.question.quizId}`)
+    }
+  }
+
+  handleQuestionDeleted (data) {
+    if (!data.success) {
+      this.setState({
+        error: data.message
+      })
+    } else {
+      toastr.success(data.message)
+      this.props.push(`/quiz-learner/quiz/edit/${this.state.question.quizId}`)
+    }
   }
 
   handleQuestionFetching (data) {
@@ -99,7 +121,7 @@ class QuestionEditPage extends Component {
 
   handleDeleteClicked (e) {
     e.preventDefault()
-    window.alert('delete clicked!')
+    quizActions.deleteQuestion(this.state.id)
   }
 
   selectCorrectAnswers (e) {

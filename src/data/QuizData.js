@@ -32,9 +32,11 @@ class QuizData {
   }
 
   static editQuestion (id, data) {
-    window.alert(id)
-    console.log(data)
     return Data.put(`${baseUrl}/editQuestion/${id}`, data, true)
+  }
+
+  static deleteQuestion (id) {
+    return Data.delete(`${baseUrl}/deleteQuestion/${id}`, true)
   }
 }
 

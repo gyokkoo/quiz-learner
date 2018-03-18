@@ -58,6 +58,17 @@ class Data {
       .fetch(`${baseUrl}${url}`, options)
       .then(handleJsonResponse)
   }
+
+  static delete (url, authenticated) {
+    let options = getOptions()
+    options.method = 'DELETE'
+
+    applyAuthorizationHeader(options, authenticated)
+
+    return window
+      .fetch(`${baseUrl}${url}`, options)
+      .then(handleJsonResponse)
+  }
 }
 
 export default Data

@@ -52,6 +52,12 @@ class QuizStore extends EventEmitter {
       .then(data => this.emit(this.eventTypes.QUESTION_EDITED, data))
   }
 
+  deleteQuestion (id) {
+    QuizData
+      .deleteQuestion(id)
+      .then(data => this.emit(this.eventTypes.QUESTION_DELETED, data))
+  }
+
   handleAction (action) {
     switch (action.type) {
       case quizActions.types.ADD_QUIZ: {
@@ -86,6 +92,10 @@ class QuizStore extends EventEmitter {
         this.editQuestion(action.id, action.question)
         break
       }
+      case quizActions.types.DELETE_QUESTION: {
+        this.deleteQuestion(action.id)
+        break
+      }
       default:
         break
     }
@@ -102,7 +112,8 @@ quizStore.eventTypes = {
   QUESTIONS_FETCHED: 'questions_fetched',
   SOLVED_QUIZ_ADDED: 'solved_quiz_added',
   QUESTION_FETCHED: 'question_fetched',
-  QUESTION_EDITED: 'question_edited'
+  QUESTION_EDITED: 'question_edited',
+  QUESTION_DELETED: 'question_deleted'
 }
 
 dispatcher.register(quizStore.handleAction.bind(quizStore))
