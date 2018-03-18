@@ -8,7 +8,8 @@ const quizActions = {
     GET_ALL_QUIZZES: 'GET_ALL_QUIZZES',
     GET_ALL_QUESTIONS: 'GET_ALL_QUESTIONS',
     GET_QUIZ_BY_ID: 'GET_QUIZ_BY_ID',
-    GET_QUESTION_BY_ID: 'GET_QUESTION_BY_ID'
+    GET_QUESTION_BY_ID: 'GET_QUESTION_BY_ID',
+    EDIT_QUESTION: 'EDIT_QUESTION'
   },
   create (quiz) {
     dispatcher.dispatch({
@@ -49,6 +50,13 @@ const quizActions = {
     dispatcher.dispatch({
       type: this.types.GET_QUESTION_BY_ID,
       id
+    })
+  },
+  editQuestion (id, question) {
+    dispatcher.dispatch({
+      type: this.types.EDIT_QUESTION,
+      id,
+      question
     })
   }
 }

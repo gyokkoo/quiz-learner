@@ -10,7 +10,7 @@ const getOptions = () => ({
   }
 })
 
-const handleJsonRespone = (res) => {
+const handleJsonResponse = (res) => {
   if (res) {
     return res.json()
   }
@@ -32,7 +32,7 @@ class Data {
 
     return window
       .fetch(`${baseUrl}${url}`, options)
-      .then(handleJsonRespone)
+      .then(handleJsonResponse)
   }
 
   static post (url, data, authenticated) {
@@ -44,7 +44,19 @@ class Data {
 
     return window
       .fetch(`${baseUrl}${url}`, options)
-      .then(handleJsonRespone)
+      .then(handleJsonResponse)
+  }
+
+  static put (url, data, authenticated) {
+    let options = getOptions()
+    options.method = 'PUT'
+    options.body = JSON.stringify(data)
+
+    applyAuthorizationHeader(options, authenticated)
+
+    return window
+      .fetch(`${baseUrl}${url}`, options)
+      .then(handleJsonResponse)
   }
 }
 

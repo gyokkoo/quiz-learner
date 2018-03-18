@@ -30,6 +30,12 @@ class QuizData {
   static getQuestionById (id) {
     return Data.get(`${baseUrl}/getQuestionById/${id}`)
   }
+
+  static editQuestion (id, data) {
+    window.alert(id)
+    console.log(data)
+    return Data.put(`${baseUrl}/editQuestion/${id}`, data, true)
+  }
 }
 
 export default QuizData
