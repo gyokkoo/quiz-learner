@@ -4,10 +4,8 @@ import UnderDevelopment from './UnderDevelopment'
 class AboutPage extends Component {
   render () {
     return (
-      <div>
-        <h2>This is about Page</h2>
-        <div>The project is stil in development!</div>
-        <div>Updates coming soon!</div>
+      <div className='container'>
+        <h4>Quiz Learner is open-source project for creating, solving and editing quizzes</h4>
         <UnderDevelopment />
       </div>
     )
