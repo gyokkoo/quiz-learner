@@ -1,6 +1,7 @@
 # quiz-learner
 Front-end project for quizzes. Powered by React.js using Flux
-You have an upcoming test, do not worry! Just create sample questions and practice.
+
+### You have an upcoming test, do not worry! Just create sample questions and practice.
 
 ## How to run the website locally?
 1. Clone the repository `git clone https://github.com/Nezhdetov/quiz-learner`
