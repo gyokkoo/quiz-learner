@@ -79,7 +79,7 @@ class QuestionEditPage extends Component {
       })
     } else {
       toastr.success(data.message)
-      this.props.push(`/quiz-learner/quiz/edit/${this.state.question.quizId}`)
+      this.props.history.push(`/quiz-learner/quiz/edit/${this.state.question.quizId}`)
     }
   }
 
@@ -90,7 +90,7 @@ class QuestionEditPage extends Component {
       })
     } else {
       toastr.success(data.message)
-      this.props.push(`/quiz-learner/quiz/edit/${this.state.question.quizId}`)
+      this.props.history.push(`/quiz-learner/quiz/edit/${this.state.question.quizId}`)
     }
   }
 
