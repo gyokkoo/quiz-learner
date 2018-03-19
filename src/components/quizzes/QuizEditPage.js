@@ -25,8 +25,8 @@ class QuizEditPage extends Component {
       loading: true
     }
 
-    this.handleQuizFetching = this.handleQuizFetching.bind(this)
-    quizStore.on(quizStore.eventTypes.QUIZ_FETCHED, this.handleQuizFetching)
+    this.handleQuizLoaded = this.handleQuizLoaded.bind(this)
+    quizStore.on(quizStore.eventTypes.QUIZ_LOADED, this.handleQuizLoaded)
   }
 
   componentDidMount () {
@@ -34,10 +34,10 @@ class QuizEditPage extends Component {
   }
 
   componentWillUnmount () {
-    quizStore.removeListener(quizStore.eventTypes.QUIZ_FETCHED, this.handleQuizFetching)
+    quizStore.removeListener(quizStore.eventTypes.QUIZ_LOADED, this.handleQuizLoaded)
   }
 
-  handleQuizFetching (data) {
+  handleQuizLoaded (data) {
     console.log(data)
 
     // TODO: Validate the input data!

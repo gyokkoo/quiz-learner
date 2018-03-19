@@ -14,8 +14,8 @@ class AllQuizzesPage extends Component {
       loaded: false
     }
 
-    this.handleQuizzesFetching = this.handleQuizzesFetching.bind(this)
-    quizStore.on(quizStore.eventTypes.QUIZZES_FETCHED, this.handleQuizzesFetching)
+    this.handleQuizzesLoaded = this.handleQuizzesLoaded.bind(this)
+    quizStore.on(quizStore.eventTypes.QUIZZES_LOADED, this.handleQuizzesLoaded)
   }
 
   componentDidMount () {
@@ -23,10 +23,10 @@ class AllQuizzesPage extends Component {
   }
 
   componentWillUnmount () {
-    quizStore.removeListener(quizStore.eventTypes.QUIZZES_FETCHED, this.handleQuizzesFetching)
+    quizStore.removeListener(quizStore.eventTypes.QUIZZES_LOADED, this.handleQuizzesLoaded)
   }
 
-  handleQuizzesFetching (data) {
+  handleQuizzesLoaded (data) {
     console.log(data)
 
     // TODO: Validate!

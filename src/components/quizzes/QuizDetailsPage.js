@@ -8,6 +8,7 @@ import toastr from 'toastr'
 class QuizDetailsPage extends Component {
   constructor (props) {
     super(props)
+
     let quizId = this.props.match.params.id
     this.state = {
       id: quizId,
@@ -20,8 +21,8 @@ class QuizDetailsPage extends Component {
       loading: true
     }
 
-    this.handleQuizFetching = this.handleQuizFetching.bind(this)
-    quizStore.on(quizStore.eventTypes.QUIZ_FETCHED, this.handleQuizFetching)
+    this.handleQuizLoaded = this.handleQuizLoaded.bind(this)
+    quizStore.on(quizStore.eventTypes.QUIZ_LOADED, this.handleQuizLoaded)
   }
 
   componentDidMount () {
@@ -29,11 +30,10 @@ class QuizDetailsPage extends Component {
   }
 
   componentWillUnmount () {
-    quizStore.removeListener(
-      quizStore.eventTypes.QUIZ_FETCHED, this.handleQuizFetching)
+    quizStore.removeListener(quizStore.eventTypes.QUIZ_LOADED, this.handleQuizLoaded)
   }
 
-  handleQuizFetching (data) {
+  handleQuizLoaded (data) {
     console.log(data)
 
     // TODO: Validate the input data!

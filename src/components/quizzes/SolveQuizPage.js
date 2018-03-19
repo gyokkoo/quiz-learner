@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import quizStore from '../../stores/QuizStore'
+import questionStore from '../../stores/QuestionStore'
+import questionActions from '../../actions/QuestionActions'
 import quizActions from '../../actions/QuizActions'
 import Question from './Question'
 import toastr from 'toastr'
@@ -26,21 +27,20 @@ class SolveQuizPage extends Component {
 
     this.state = initialState
 
-    this.handleQuestionsFetching = this.handleQuestionsFetching.bind(this)
-    quizStore.on(quizStore.eventTypes.QUESTIONS_FETCHED, this.handleQuestionsFetching)
+    this.handleQuestionsLoaded = this.handleQuestionsLoaded.bind(this)
+    questionStore.on(questionStore.eventTypes.QUESTIONS_LOADED, this.handleQuestionsLoaded)
   }
 
   componentDidMount () {
-    quizActions.getAllQuestions(this.state.id)
+    questionActions.getAllQuestions(this.state.id)
     quizCache.clear()
   }
 
   componentWillUnmount () {
-    quizStore.removeListener(
-      quizStore.eventTypes.QUESTIONS_FETCHED, this.handleQuestionsFetching)
+    questionStore.removeListener(questionStore.eventTypes.QUESTIONS_LOADED, this.handleQuestionsLoaded)
   }
 
-  handleQuestionsFetching (data) {
+  handleQuestionsLoaded (data) {
     console.log(data)
     // TODO: Validate!
 

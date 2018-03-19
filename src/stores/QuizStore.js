@@ -19,37 +19,13 @@ class QuizStore extends EventEmitter {
   getAllQuizzes () {
     QuizData
       .getAllQuizzes()
-      .then(data => this.emit(this.eventTypes.QUIZZES_FETCHED, data))
-  }
-
-  getAllQuestions (id) {
-    QuizData
-      .getAllQuestions(id)
-      .then(data => this.emit(this.eventTypes.QUESTIONS_FETCHED, data))
+      .then(data => this.emit(this.eventTypes.QUIZZES_LOADED, data))
   }
 
   getQuizById (id) {
     QuizData
       .getQuizById(id)
-      .then(data => this.emit(this.eventTypes.QUIZ_FETCHED, data))
-  }
-
-  getQuestionById (id) {
-    QuizData
-      .getQuestionById(id)
-      .then(data => this.emit(this.eventTypes.QUESTION_FETCHED, data))
-  }
-
-  editQuestion (id, question) {
-    QuizData
-      .editQuestion(id, question)
-      .then(data => this.emit(this.eventTypes.QUESTION_EDITED, data))
-  }
-
-  deleteQuestion (id) {
-    QuizData
-      .deleteQuestion(id)
-      .then(data => this.emit(this.eventTypes.QUESTION_DELETED, data))
+      .then(data => this.emit(this.eventTypes.QUIZ_LOADED, data))
   }
 
   handleAction (action) {
@@ -58,16 +34,8 @@ class QuizStore extends EventEmitter {
         this.create(action.quiz)
         break
       }
-      case quizActions.types.ADD_QUESTION: {
-        this.addQuestion(action.question)
-        break
-      }
       case quizActions.types.GET_ALL_QUIZZES: {
         this.getAllQuizzes()
-        break
-      }
-      case quizActions.types.GET_ALL_QUESTIONS: {
-        this.getAllQuestions(action.quizId)
         break
       }
       case quizActions.types.GET_QUIZ_BY_ID: {
@@ -76,18 +44,6 @@ class QuizStore extends EventEmitter {
       }
       case quizActions.types.ADD_SOLVED_QUIZ: {
         this.addSolvedQuiz(action.solvedQuiz)
-        break
-      }
-      case quizActions.types.GET_QUESTION_BY_ID: {
-        this.getQuestionById(action.id)
-        break
-      }
-      case quizActions.types.EDIT_QUESTION: {
-        this.editQuestion(action.id, action.question)
-        break
-      }
-      case quizActions.types.DELETE_QUESTION: {
-        this.deleteQuestion(action.id)
         break
       }
       default:
@@ -100,14 +56,9 @@ let quizStore = new QuizStore()
 
 quizStore.eventTypes = {
   QUIZ_ADDED: 'quiz_added',
-  QUESTION_ADDED: 'question_added',
-  QUIZZES_FETCHED: 'quizzes_fetched',
-  QUIZ_FETCHED: 'quiz_fetched',
-  QUESTIONS_FETCHED: 'questions_fetched',
-  SOLVED_QUIZ_ADDED: 'solved_quiz_added',
-  QUESTION_FETCHED: 'question_fetched',
-  QUESTION_EDITED: 'question_edited',
-  QUESTION_DELETED: 'question_deleted'
+  QUIZZES_LOADED: 'quizzes_loaded',
+  QUIZ_LOADED: 'quiz_loaded',
+  SOLVED_QUIZ_ADDED: 'solved_quiz_added'
 }
 
 dispatcher.register(quizStore.handleAction.bind(quizStore))

@@ -28,19 +28,18 @@ class QuizResultsPage extends Component {
       error: ''
     }
 
-    this.handleSolvedQuizFetching = this.handleSolvedQuizFetching.bind(this)
-    quizStore.on(quizStore.eventTypes.SOLVED_QUIZ_ADDED, this.handleSolvedQuizFetching)
+    this.handleSolvedQuizLoading = this.handleSolvedQuizLoading.bind(this)
+    quizStore.on(quizStore.eventTypes.SOLVED_QUIZ_ADDED, this.handleSolvedQuizLoading)
   }
 
   componentWillUnmount () {
-    quizStore.removeListener(
-      quizStore.eventTypes.SOLVED_QUIZ_ADDED, this.handleSolvedQuizFetching)
+    quizStore.removeListener(quizStore.eventTypes.SOLVED_QUIZ_ADDED, this.handleSolvedQuizLoading)
   }
 
-  handleSolvedQuizFetching (data) {
+  handleSolvedQuizLoading (data) {
     if (!data.success) {
       this.setState({
-        error: 'Problem with solved quiz fetching'
+        error: 'Problem with solved quiz loading'
       })
     } else {
       toastr.success(data.message)

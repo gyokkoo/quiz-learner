@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import quizStore from '../../stores/QuizStore'
-import quizActions from '../../actions/QuizActions'
+import questionStore from '../../stores/QuestionStore'
+import questionActions from '../../actions/QuestionActions'
 // import Auth from '../users/Auth'
 // import { Link } from 'react-router-dom'
 import toastr from 'toastr'
@@ -24,24 +24,24 @@ class QuestionEditPage extends Component {
       error: ''
     }
 
-    this.handleQuestionFetching = this.handleQuestionFetching.bind(this)
-    quizStore.on(quizStore.eventTypes.QUESTION_FETCHED, this.handleQuestionFetching)
+    this.handleQuestionLoaded = this.handleQuestionLoaded.bind(this)
+    questionStore.on(questionStore.eventTypes.QUESTION_LOADED, this.handleQuestionLoaded)
 
     this.handleQuestionEdited = this.handleQuestionEdited.bind(this)
-    quizStore.on(quizStore.eventTypes.QUESTION_EDITED, this.handleQuestionEdited)
+    questionStore.on(questionStore.eventTypes.QUESTION_EDITED, this.handleQuestionEdited)
 
     this.handleQuestionDeleted = this.handleQuestionDeleted.bind(this)
-    quizStore.on(quizStore.eventTypes.QUESTION_DELETED, this.handleQuestionDeleted)
+    questionStore.on(questionStore.eventTypes.QUESTION_DELETED, this.handleQuestionDeleted)
   }
 
   componentDidMount () {
-    quizActions.getQuestionById(this.state.id)
+    questionActions.getQuestionById(this.state.id)
   }
 
   componentWillUnmount () {
-    quizStore.removeListener(quizStore.eventTypes.QUESTION_FETCHED, this.handleQuestionFetching)
-    quizStore.removeListener(quizStore.eventTypes.QUESTION_EDITED, this.handleQuestionEdited)
-    quizStore.removeListener(quizStore.eventTypes.QUESTION_DELETED, this.handleQuestionDeleted)
+    questionStore.removeListener(questionStore.eventTypes.QUESTION_LOADED, this.handleQuestionLoaded)
+    questionStore.removeListener(questionStore.eventTypes.QUESTION_EDITED, this.handleQuestionEdited)
+    questionStore.removeListener(questionStore.eventTypes.QUESTION_DELETED, this.handleQuestionDeleted)
   }
 
   handleUserChange (event) {
@@ -94,7 +94,7 @@ class QuestionEditPage extends Component {
     }
   }
 
-  handleQuestionFetching (data) {
+  handleQuestionLoaded (data) {
     console.log(data)
     if (!data.success) {
       this.setState({
@@ -116,12 +116,12 @@ class QuestionEditPage extends Component {
     this.setState({
       question
     })
-    quizActions.editQuestion(this.state.id, this.state.question)
+    questionActions.editQuestion(this.state.id, this.state.question)
   }
 
   handleDeleteClicked (e) {
     e.preventDefault()
-    quizActions.deleteQuestion(this.state.id)
+    questionActions.deleteQuestion(this.state.id)
   }
 
   selectCorrectAnswers (e) {
