@@ -1,20 +1,24 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
+
 import HomePage from '../../HomePage'
+import AboutPage from '../../AboutPage'
+
 import RegisterPage from '../../users/RegisterPage'
 import LoginPage from '../../users/LoginPage'
 import LogoutPage from '../../users/LogoutPage'
 import UserProfilePage from '../../users/UserProfilePage'
-import AboutPage from '../../AboutPage'
+
 import AllQuizzesPage from '../../quizzes/AllQuizzesPage'
 import CreateQuizPage from '../../quizzes/CreateQuizPage'
-import AddQuestionsPage from '../../quizzes/AddQuestionsPage'
 import SolveQuizPage from '../../quizzes/SolveQuizPage'
 import QuizDetailsPage from '../../quizzes/QuizDetailsPage'
 import QuizResultsPage from '../../quizzes/QuizResultsPage'
 import QuizEditPage from '../../quizzes/QuizEditPage'
-import QuestionEditPage from '../../quizzes/QuestionEditPage'
+
+import AddQuestionsPage from '../../questions/AddQuestionsPage'
+import QuestionEditPage from '../../questions/QuestionEditPage'
 
 const Routes = () => (
   <Switch>

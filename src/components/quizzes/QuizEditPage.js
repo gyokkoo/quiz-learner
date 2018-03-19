@@ -4,7 +4,7 @@ import quizActions from '../../actions/QuizActions'
 // import Auth from '../users/Auth'
 import { Link } from 'react-router-dom'
 import toastr from 'toastr'
-import Question from './Question'
+import Question from '../questions/Question'
 
 class QuizEditPage extends Component {
   constructor (props) {
