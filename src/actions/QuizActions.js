@@ -3,7 +3,6 @@ import dispatcher from '../dispatcher'
 const quizActions = {
   types: {
     ADD_QUIZ: 'ADD_QUIZ',
-    ADD_QUESTION: 'ADD_QUESTION',
     ADD_SOLVED_QUIZ: 'ADD_SOLVED_QUIZ',
     GET_ALL_QUIZZES: 'GET_ALL_QUIZZES',
     GET_ALL_QUESTIONS: 'GET_ALL_QUESTIONS',
@@ -16,12 +15,6 @@ const quizActions = {
     dispatcher.dispatch({
       type: this.types.ADD_QUIZ,
       quiz
-    })
-  },
-  addQuestion (question) {
-    dispatcher.dispatch({
-      type: this.types.ADD_QUESTION,
-      question
     })
   },
   addSolvedQuiz (solvedQuiz) {

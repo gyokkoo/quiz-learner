@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import quizStore from '../../stores/QuizStore'
-import quizActions from '../../actions/QuizActions'
+import questionStore from '../../stores/QuestionStore'
+import questionActions from '../../actions/QuestionActions'
 import FormHelpers from '../common/forms/FormHelpers'
 import toastr from 'toastr'
 
@@ -48,15 +48,14 @@ class AddQuestionsPage extends Component {
     this.state = initialState
 
     this.handleQuestionCreation = this.handleQuestionCreation.bind(this)
-    quizStore.on(quizStore.eventTypes.QUESTION_ADDED, this.handleQuestionCreation)
+    questionStore.on(questionStore.eventTypes.QUESTION_ADDED, this.handleQuestionCreation)
   }
 
   componentDidMount () {
   }
 
   componentWillUnmount () {
-    quizStore.removeListener(
-      quizStore.eventTypes.QUESTION_ADDED, this.handleQuestionCreation)
+    questionStore.removeListener(questionStore.eventTypes.QUESTION_ADDED, this.handleQuestionCreation)
   }
 
   handleQuestionChange (event) {
@@ -117,7 +116,7 @@ class AddQuestionsPage extends Component {
       answers: this.state.answers,
       correctAnswers: this.state.correctAnswers
     }
-    quizActions.addQuestion(question)
+    questionActions.addQuestion(question)
   }
 
   handleQuizFinish (event) {

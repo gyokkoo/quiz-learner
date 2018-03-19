@@ -10,12 +10,6 @@ class QuizStore extends EventEmitter {
       .then(data => this.emit(this.eventTypes.QUIZ_ADDED, data))
   }
 
-  addQuestion (question) {
-    QuizData
-      .addQuestion(question)
-      .then(data => this.emit(this.eventTypes.QUESTION_ADDED, data))
-  }
-
   addSolvedQuiz (quiz) {
     QuizData
       .addSolvedQuiz(quiz)
