@@ -13,6 +13,7 @@ const initialState = {
     correctAnswers: []
   }],
   questionIndex: 0,
+  loading: true,
   error: ''
 }
 
@@ -45,7 +46,8 @@ class SolveQuizPage extends Component {
 
     data.questions.selectedAnswers = []
     this.setState({
-      questions: data.questions
+      questions: data.questions,
+      loading: false
     })
     toastr.success('Questions loaded!')
     console.log(this.state)
@@ -96,6 +98,9 @@ class SolveQuizPage extends Component {
   }
 
   render () {
+    if (this.state.loading) {
+      return <div className='text-info'>Loading...</div>
+    }
     const { questions, questionIndex } = this.state
 
     if (questions[questionIndex] === undefined) {

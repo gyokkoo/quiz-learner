@@ -56,7 +56,7 @@ class QuizDetailsPage extends Component {
 
     let editButton = ''
     console.log()
-    if (this.state.creator === Auth.getUser().name) {
+    if (this.state.creator === Auth.getUser().name || Auth.getUser().name === 'admin') {
       editButton =
         <Link to={`/quiz-learner/quiz/edit/${this.state.id}`}>
           <input type='button' className='btn btn-danger btn-md' value='Edit quiz!' />
@@ -80,9 +80,15 @@ class QuizDetailsPage extends Component {
         </div>
         <hr />
         <div className='group-btn'>
-          <Link to={`/quiz-learner/quiz/details/solve/${this.state.id}`}>
-            <input type='button' className='btn btn-primary btn-md' value='Start quiz!' />
-          </Link>
+          {
+            Auth.isUserAuthenticated()
+            ? (<Link to={`/quiz-learner/quiz/details/solve/${this.state.id}`}>
+              <input type='button' className='btn btn-primary btn-md' value='Start quiz!' />
+            </Link>)
+            : (<Link to={`/quiz-learner/users/login`}>
+              <input type='button' className='btn btn-info btn-md' value='Login to start!' />
+            </Link>)
+          }
           <span>&nbsp;&nbsp;&nbsp;</span>
           <Link to='/quiz-learner/quiz/all'>
             <input type='button' className='btn btn-warning btn-md' value='All Quizzes!' />
