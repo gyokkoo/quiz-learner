@@ -2,8 +2,8 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 
-import HomePage from '../../HomePage'
-import AboutPage from '../../AboutPage'
+import HomePage from '../HomePage'
+import AboutPage from '../AboutPage'
 
 import RegisterPage from '../../users/RegisterPage'
 import LoginPage from '../../users/LoginPage'

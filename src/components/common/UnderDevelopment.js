@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import image from '../data/images/work-in-progess.png'
+import image from '../../data/images/work-in-progess.png'
 
 class UnderDevelopment extends Component {
   render () {
