@@ -5,7 +5,8 @@ const quizActions = {
     ADD_QUIZ: 'ADD_QUIZ',
     ADD_SOLVED_QUIZ: 'ADD_SOLVED_QUIZ',
     GET_ALL_QUIZZES: 'GET_ALL_QUIZZES',
-    GET_QUIZ_BY_ID: 'GET_QUIZ_BY_ID'
+    GET_QUIZ_BY_ID: 'GET_QUIZ_BY_ID',
+    DELETE_QUIZ: 'DELETE_QUIZ'
   },
   create (quiz) {
     dispatcher.dispatch({
@@ -27,6 +28,12 @@ const quizActions = {
   getQuizById (quizId) {
     dispatcher.dispatch({
       type: this.types.GET_QUIZ_BY_ID,
+      quizId
+    })
+  },
+  deleteQuiz (quizId) {
+    dispatcher.dispatch({
+      type: this.types.DELETE_QUIZ,
       quizId
     })
   }

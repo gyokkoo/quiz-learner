@@ -38,6 +38,10 @@ class QuizData {
   static deleteQuestion (id) {
     return Data.delete(`${baseUrl}/deleteQuestion/${id}`, true)
   }
+
+  static deleteQuiz(id) {
+    return Data.delete(`${baseUrl}/deleteQuiz/${id}`, true)
+  }
 }
 
 export default QuizData

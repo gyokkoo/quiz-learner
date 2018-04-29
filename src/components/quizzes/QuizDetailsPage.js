@@ -55,7 +55,6 @@ class QuizDetailsPage extends Component {
     }
 
     let editButton = ''
-    console.log()
     if (this.state.creator === Auth.getUser().name || Auth.getUser().name === 'admin') {
       editButton =
         <Link to={`/quiz-learner/quiz/edit/${this.state.id}`}>

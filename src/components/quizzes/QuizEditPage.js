@@ -26,7 +26,10 @@ class QuizEditPage extends Component {
     }
 
     this.handleQuizLoaded = this.handleQuizLoaded.bind(this)
+    this.handleQuizDeleted = this.handleQuizDeleted.bind(this)
+    
     quizStore.on(quizStore.eventTypes.QUIZ_LOADED, this.handleQuizLoaded)
+    quizStore.on(quizStore.eventTypes.QUIZ_DELETED, this.handleQuizDeleted)
   }
 
   componentDidMount () {
@@ -35,6 +38,16 @@ class QuizEditPage extends Component {
 
   componentWillUnmount () {
     quizStore.removeListener(quizStore.eventTypes.QUIZ_LOADED, this.handleQuizLoaded)
+  }
+
+  deleteQuiz () {
+    if (window.confirm('Are you sure you wish to delete the quiz with all questions?')) {
+      quizStore.deleteQuiz(this.state.id)
+    }
+  }
+
+  handleQuizDeleted (data) {
+    console.log(data)
   }
 
   handleQuizLoaded (data) {
@@ -72,6 +85,11 @@ class QuizEditPage extends Component {
     return (
       <div className='container'>
         {result}
+        <div>
+          <input type='button' className='btn btn-danger btn-md' onClick={this.deleteQuiz.bind(this)} value='Delete the quiz!' />
+          <div className='delete-button' onClick={this.deleteQuiz.bind(this)} />
+          
+        </div>
       </div>
     )
   }
