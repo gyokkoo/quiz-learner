@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
 import toastr from 'toastr'
-import './AllQuizzesPage.css'
+import './QuizzessStyle.css'
 
 class AllQuizzesPage extends Component {
   constructor (props) {
@@ -51,18 +51,18 @@ class AllQuizzesPage extends Component {
     )
 
     return (
-      <div className='text-center'>
-        <h1>All quizzes in the database</h1>
-        <div className='quiz-view'>
-          <table className='quiz-table'>
+      <div className='container'>
+        <div className='row col-md-9 col-md-offset-1 custyle'>
+          <h1>All quizzes!</h1>
+          <table className='table table-striped custab'>
             <thead>
               <tr>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Action</th>
+                <th className='text-center'>Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className='text-left'>
               {quizRows}
             </tbody>
           </table>

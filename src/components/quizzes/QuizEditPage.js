@@ -42,11 +42,16 @@ class QuizEditPage extends Component {
 
   deleteQuiz () {
     if (window.confirm('Are you sure you wish to delete the quiz with all questions?')) {
-      quizStore.deleteQuiz(this.state.id)
+      quizStore.deleteQuiz(this.state.id)      
     }
   }
 
   handleQuizDeleted (data) {
+    if (data.success)
+    {
+      toastr.success('Quiz deleted!')
+      this.props.history.push('/quiz-learner/quiz/all')
+    }
     console.log(data)
   }
 
@@ -88,7 +93,6 @@ class QuizEditPage extends Component {
         <div>
           <input type='button' className='btn btn-danger btn-md' onClick={this.deleteQuiz.bind(this)} value='Delete the quiz!' />
           <div className='delete-button' onClick={this.deleteQuiz.bind(this)} />
-          
         </div>
       </div>
     )
