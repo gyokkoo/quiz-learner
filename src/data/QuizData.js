@@ -42,6 +42,10 @@ class QuizData {
   static deleteQuiz(id) {
     return Data.delete(`${baseUrl}/deleteQuiz/${id}`, true)
   }
+
+  static getMostRecent() {
+    return Data.get(`${baseUrl}/getMostRecent`)
+  }
 }
 
 export default QuizData

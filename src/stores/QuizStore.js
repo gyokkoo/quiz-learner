@@ -34,6 +34,12 @@ class QuizStore extends EventEmitter {
       .then(data => this.emit(this.eventTypes.QUIZ_DELETED, data))
   }
 
+  getMostRecent () {
+    QuizData
+      .getMostRecent()
+      .then(data => this.emit(this.eventTypes.MOST_RECENT_LOADED, data))
+  }
+
   handleAction (action) {
     switch (action.type) {
       case quizActions.types.ADD_QUIZ: {
@@ -56,6 +62,10 @@ class QuizStore extends EventEmitter {
         this.deleteQuiz(action.quizId)
         break
       }
+      case quizActions.types.GET_MOST_RECENT: {
+        this.getMostRecent()
+        break
+      }
       default:
         break
     }
@@ -69,7 +79,8 @@ quizStore.eventTypes = {
   QUIZZES_LOADED: 'quizzes_loaded',
   QUIZ_LOADED: 'quiz_loaded',
   SOLVED_QUIZ_ADDED: 'solved_quiz_added',
-  QUIZ_DELETED: 'quiz_deleted'
+  QUIZ_DELETED: 'quiz_deleted',
+  MOST_RECENT_LOADED: 'most_recent_loaded'
 }
 
 dispatcher.register(quizStore.handleAction.bind(quizStore))

@@ -6,7 +6,8 @@ const quizActions = {
     ADD_SOLVED_QUIZ: 'ADD_SOLVED_QUIZ',
     GET_ALL_QUIZZES: 'GET_ALL_QUIZZES',
     GET_QUIZ_BY_ID: 'GET_QUIZ_BY_ID',
-    DELETE_QUIZ: 'DELETE_QUIZ'
+    DELETE_QUIZ: 'DELETE_QUIZ',
+    GET_MOST_RECENT: 'GET_MOST_RECENT'
   },
   create (quiz) {
     dispatcher.dispatch({
@@ -35,6 +36,11 @@ const quizActions = {
     dispatcher.dispatch({
       type: this.types.DELETE_QUIZ,
       quizId
+    })
+  },
+  getMostRecent () {
+    dispatcher.dispatch({
+      type: this.types.GET_MOST_RECENT
     })
   }
 }
