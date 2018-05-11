@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
+import Auth from '../users/Auth'
 import toastr from 'toastr'
 
 class HomePage extends Component {
@@ -63,12 +64,18 @@ class HomePage extends Component {
           <td><Link to={`/quiz-learner/quiz/details/${quiz._id}`}>&nbsp;&nbsp;Play</Link></td>
         </tr>
     )
+
+    let link;
+    if (Auth.isUserAuthenticated()) {
+      link = <Link to='/quiz-learner/quiz/create'> create quiz </Link>
+    } else {
+      link = <Link to='/quiz-learner/users/register'> register </Link>
+    }
     return (
       <div>
         <h2>Welcome to Quiz Learner!</h2>
         <h3><Link to='quiz-learner/quiz/all/'> Play quizzes </Link> and expand your knowledge!</h3>
-        <h4>You have knowledge to share? Great! Then
-          <Link to='/quiz-learner/quiz/create'> create quiz </Link> and share it to the world.</h4>
+        <h4>You have knowledge to share? Great! Then {link} and share it to the world.</h4>
         <p className='well container'>
           <div>Quizzes info:</div>
           <div>Total quizzes: {this.state.totalQuizzes}</div>
