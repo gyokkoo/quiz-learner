@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import Input from '../common/forms/Input'
 
 const RegisterForm = (props) => (
@@ -39,6 +41,10 @@ const RegisterForm = (props) => (
         placeholder='Age'
         value={props.user.age}
         onChange={props.onChange} />
+      <p>
+        <span>Already have an account? </span>
+        <Link to='/quiz-learner/users/login'>Login here</Link>
+      </p>
       <button type='submit' className='btn btn-primary' onClick={props.onSave}>Submit</button>
     </fieldset>
   </form>
