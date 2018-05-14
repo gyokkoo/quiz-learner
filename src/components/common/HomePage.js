@@ -4,6 +4,7 @@ import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
 import Auth from '../users/Auth'
 import toastr from 'toastr'
+import Loader from '../common/loader/Loader'
 
 class HomePage extends Component {
 
@@ -53,7 +54,7 @@ class HomePage extends Component {
 
   render () {
     if (!this.state.loaded) {
-      return <div>Loading...</div>
+      return <Loader />
     }
     
     let quizRows = this.state.threeMostRecent.map(quiz => 
@@ -76,15 +77,15 @@ class HomePage extends Component {
         <h2>Welcome to Quiz Learner!</h2>
         <h3><Link to='quiz-learner/quiz/all/'> Play quizzes </Link> and expand your knowledge!</h3>
         <h4>You have knowledge to share? Great! Then {link} and share it to the world.</h4>
-        <p className='well container'>
+        <div className='well container'>
           <div>Quizzes info:</div>
           <div>Total quizzes: {this.state.totalQuizzes}</div>
           <div>Total users: {this.state.totalUsers}</div>
           <div>Total solved quizzes: {this.state.totalSolvedQuizzes}</div>
           <div>Total questions: {this.state.totalQuestions}</div>
-        </p>
+        </div>
         <hr />
-        <h4>Three most recent quizzes:</h4>
+        <h4>Most recent quizzes:</h4>
         <div className='row col-md-8 col-md-offset-2 custyle'>
           <table className='table table-striped custab'>
               <thead>
