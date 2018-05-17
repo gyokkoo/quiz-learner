@@ -38,18 +38,18 @@ class HomePage extends Component {
       this.setState({
         error: data.message
       })
+    } else {
+      console.log(data)
+      this.setState({
+        threeMostRecent: data.data.quizzes,
+        totalQuizzes: data.data.totalQuizzes,
+        totalQuestions: data.data.totalQuestions,
+        totalSolvedQuizzes: data.data.totalSolvedQuizzes,
+        totalUsers: data.data.totalUsers,
+        loaded: true
+      })
+      toastr.success('Info loaded!')
     }
-
-    console.log(data)
-    this.setState({
-      threeMostRecent: data.data.quizzes,
-      totalQuizzes: data.data.totalQuizzes,
-      totalQuestions: data.data.totalQuestions,
-      totalSolvedQuizzes: data.data.totalSolvedQuizzes,
-      totalUsers: data.data.totalUsers,
-      loaded: true
-    })
-    toastr.success('Info loaded!')
   }
 
   render () {

@@ -3,7 +3,7 @@ import './Loader.css'
 
 const Loader = (props) => (
   <div className="loadingContainer">
-    <div>Loading...</div>
+    <h4>Loading...</h4>
     <div className="ball" />  
     <div className="ball" />    
     <div className="ball" />

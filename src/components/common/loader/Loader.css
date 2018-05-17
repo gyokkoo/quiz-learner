@@ -5,10 +5,14 @@
   margin: 0 auto;
 }
 
+.loadingContainer h4 {
+  padding-bottom: 50%;
+}
+
 .ball {
-  width: 10px;
-  height: 10px;
-  margin: 10px auto;
+  width: 22px;
+  height: 22px;
+  margin: 22px auto;
   border-radius: 25px;
   position: relative;
   animation-name: red;

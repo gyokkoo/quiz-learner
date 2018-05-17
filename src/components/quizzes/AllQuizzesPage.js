@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import quizStore from '../../stores/QuizStore'
 import quizActions from '../../actions/QuizActions'
 import toastr from 'toastr'
+import Loader from '../common/loader/Loader'
 import './QuizzessStyle.css'
 
 class AllQuizzesPage extends Component {
@@ -39,7 +40,7 @@ class AllQuizzesPage extends Component {
 
   render () {
     if (!this.state.loaded) {
-      return <div>Loading ...</div>
+      return <Loader />
     }
 
     let quizRows = this.state.quizzes.map(quiz =>
